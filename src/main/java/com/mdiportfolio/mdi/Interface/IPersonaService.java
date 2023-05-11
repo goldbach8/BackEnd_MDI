@@ -14,7 +14,5 @@ public interface IPersonaService {
     public void deletePersona(int id);
     
     public Persona findPersona(int id);
-
-    public boolean existsById(int id);
     
 }
