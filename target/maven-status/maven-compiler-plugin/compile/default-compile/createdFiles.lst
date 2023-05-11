@@ -43,3 +43,4 @@ com\mdiportfolio\mdi\Security\jwt\JwtTokenFilter.class
 com\mdiportfolio\mdi\Security\Entity\Usuario.class
 com\mdiportfolio\mdi\Controler\CEducacion.class
 com\mdiportfolio\mdi\Entity\Proyecto.class
+com\mdiportfolio\mdi\WebConfig.class
