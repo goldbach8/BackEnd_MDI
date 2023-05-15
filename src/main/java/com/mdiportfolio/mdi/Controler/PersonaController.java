@@ -51,11 +51,12 @@ public class PersonaController {
         Persona persona = ipersonaService.findPersona(id);
         
         persona.setNombre(dtopersona.getNombre());
+        persona.setApellido(dtopersona.getApellido());
         persona.setDescripcion((dtopersona.getDescripcion()));
         persona.setImg((dtopersona.getImg()));
         
         ipersonaService.savePersona(persona);
-        return new ResponseEntity(new Mensaje("Experiencia actualizada"), HttpStatus.OK);
+        return new ResponseEntity(new Mensaje("Perfil actualizado"), HttpStatus.OK);
     }
     /*@PutMapping("/editar/{id}")
     public  Persona editPersona(@PathVariable int id, 
