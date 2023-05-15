@@ -1,10 +1,14 @@
 
 package com.mdiportfolio.mdi.Controler;
 
+import com.mdiportfolio.mdi.Dto.dtoPersona;
 import com.mdiportfolio.mdi.Entity.Persona;
 import com.mdiportfolio.mdi.Interface.IPersonaService;
+import com.mdiportfolio.mdi.Security.Controller.Mensaje;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -42,7 +45,19 @@ public class PersonaController {
         return "la persona fue correctamente borrada";
     }
     
-    @PutMapping("/editar/{id}")
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoPersona dtopersona){
+        
+        Persona persona = ipersonaService.findPersona(id);
+        
+        persona.setNombre(dtopersona.getNombre());
+        persona.setDescripcion((dtopersona.getDescripcion()));
+        persona.setImg((dtopersona.getImg()));
+        
+        ipersonaService.savePersona(persona);
+        return new ResponseEntity(new Mensaje("Experiencia actualizada"), HttpStatus.OK);
+    }
+    /*@PutMapping("/editar/{id}")
     public  Persona editPersona(@PathVariable int id, 
                                 @RequestParam("nombre") String nuevoNombre,
                                 @RequestParam("apellido") String nuevoApellido,
@@ -56,8 +71,8 @@ public class PersonaController {
         persona.setImg(nuevoImg);
         
         ipersonaService.savePersona(persona);
-        return persona;
-    }
+        return persona;*/
+    
     @GetMapping("/traer/perfil")
     public Persona findPersona(){
         return ipersonaService.findPersona((int)1);}
